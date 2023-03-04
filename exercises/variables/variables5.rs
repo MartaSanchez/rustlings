@@ -6,6 +6,7 @@
 fn main() {
     let number = "T-H-R-E-E"; // don't change this line
     println!("Spell a Number : {}", number);
-    number = 3; // don't rename this variable
-    println!("Number plus two is : {}", number + 2);
+    number = "3"; // don't rename this variable
+    let new_number:_ = number.parse().unwrap();
+    println!("Number plus two is : {}", new_number + 2);
 }
