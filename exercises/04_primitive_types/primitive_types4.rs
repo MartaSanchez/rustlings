@@ -10,7 +10,7 @@ mod tests {
 
         // TODO: Get a slice called `nice_slice` out of the array `a` so that the test passes.
         // let nice_slice = ???
-
+        let nice_slice:[i32; 3] = a[1..4].try_into().unwrap();
         assert_eq!([2, 3, 4], nice_slice);
     }
 }
