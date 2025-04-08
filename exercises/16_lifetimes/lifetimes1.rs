@@ -3,8 +3,10 @@
 // going out of scope before it is used. Remember, references are borrows and do
 // not own their own data. What if their owner goes out of scope?
 
-// TODO: Fix the compiler error by updating the function signature.
-fn longest(x: &str, y: &str) -> &str {
+
+// The returned reference will be valid as long as both the parameters are valid.
+// We’re specifying that the borrow checker should reject any values that don’t adhere to these constraints
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
     } else {
