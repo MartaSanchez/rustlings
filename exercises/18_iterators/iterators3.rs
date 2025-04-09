@@ -8,24 +8,28 @@ enum DivisionError {
     NotDivisible,
 }
 
-// TODO: Calculate `a` divided by `b` if `a` is evenly divisible by `b`.
-// Otherwise, return a suitable error.
 fn divide(a: i64, b: i64) -> Result<i64, DivisionError> {
-    todo!();
+    match b {
+        0 => Err(DivisionError::DivideByZero),
+        _ if a == i64::MIN && b == -1 => Err(DivisionError::IntegerOverflow),
+        _ if a % b != 0 => Err(DivisionError::NotDivisible),
+        _ => Ok(a / b),
+    }
 }
 
-// TODO: Add the correct return type and complete the function body.
-// Desired output: `Ok([1, 11, 1426, 3])`
-fn result_with_list() {
+fn result_with_list() -> Result<Vec<i64>, DivisionError> {          
     let numbers = [27, 297, 38502, 81];
     let division_results = numbers.into_iter().map(|n| divide(n, 27));
+    division_results.collect()
 }
+ 
 
-// TODO: Add the correct return type and complete the function body.
-// Desired output: `[Ok(1), Ok(11), Ok(1426), Ok(3)]`
-fn list_of_results() {
+
+
+fn list_of_results() -> Vec<Result<i64, DivisionError>> {
     let numbers = [27, 297, 38502, 81];
-    let division_results = numbers.into_iter().map(|n| divide(n, 27));
+    let division_results= numbers.into_iter().map(|n| divide(n, 27));
+    division_results.collect()
 }
 
 fn main() {
@@ -46,10 +50,11 @@ mod tests {
         assert_eq!(divide(81, 0), Err(DivisionError::DivideByZero));
     }
 
-    #[test]
+ #[test]
     fn test_integer_overflow() {
         assert_eq!(divide(i64::MIN, -1), Err(DivisionError::IntegerOverflow));
     }
+   
 
     #[test]
     fn test_not_divisible() {
@@ -61,10 +66,13 @@ mod tests {
         assert_eq!(divide(0, 81), Ok(0));
     }
 
-    #[test]
+ 
+     #[test]
     fn test_result_with_list() {
         assert_eq!(result_with_list().unwrap(), [1, 11, 1426, 3]);
     }
+  
+   
 
     #[test]
     fn test_list_of_results() {
