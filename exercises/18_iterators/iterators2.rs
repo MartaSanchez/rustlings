@@ -1,28 +1,38 @@
-// In this exercise, you'll learn some of the unique advantages that iterators
-// can offer.
-
-// TODO: Complete the `capitalize_first` function.
-// "hello" -> "Hello"
 fn capitalize_first(input: &str) -> String {
-    let mut chars = input.chars();
+    let mut chars = input.chars(); // array of chars
+    let mut result: String = String::new();
     match chars.next() {
-        None => String::new(),
-        Some(first) => todo!(),
+        None => return result,
+        Some(first) => {
+            result += &first.to_uppercase().to_string();
+        },
     }
+    result += chars.as_str();
+    result
 }
 
-// TODO: Apply the `capitalize_first` function to a slice of string slices.
-// Return a vector of strings.
-// ["hello", "world"] -> ["Hello", "World"]
+/*
+ When you call `collect()`, Rust looks at the surrounding context to infer the type of the collection you want to create. 
+If the function signature specifies a return type, Rust uses that information to determine what type to collect into.
+*/
+
 fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
-    // ???
+    //words.iter().map(|word| capitalize_first(word)).collect()
+
+    let mut result:Vec<String> = Vec::new();
+    for word in words.iter(){
+        result.push(capitalize_first(word))
+    }
+    result
 }
 
-// TODO: Apply the `capitalize_first` function again to a slice of string
-// slices. Return a single string.
-// ["hello", " ", "world"] -> "Hello World"
 fn capitalize_words_string(words: &[&str]) -> String {
-    // ???
+    //words.iter().map(|word| capitalize_first(word)).collect()
+    let mut result: String= String::new(); 
+    for word in words.iter() {
+        result += &capitalize_first(word);
+    }
+    result
 }
 
 fn main() {
