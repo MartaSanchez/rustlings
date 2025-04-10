@@ -1,15 +1,12 @@
 fn factorial(num: u64) -> u64 {
-    // TODO: Complete this function to return the factorial of `num` which is
-    // defined as `1 * 2 * 3 * … * num`.
-    // https://en.wikipedia.org/wiki/Factorial
-    //
-    // Do not use:
-    // - early returns (using the `return` keyword explicitly)
-    // Try not to use:
-    // - imperative style loops (for/while)
-    // - additional variables
-    // For an extra challenge, don't use:
-    // - recursion
+    let mut result = 1;
+
+    for x in 2..=num {
+        result *= x;
+    }
+    result
+//(2..=num).product()
+//(2..=num).fold(1, |acc, x| acc * x)
 }
 
 fn main() {
